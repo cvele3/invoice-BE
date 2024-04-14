@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: praksaFakture
+
+  datasource:
+    url: jdbc:oracle:thin:@praksadb_high?TNS_ADMIN=/home/ubuntu/javaApp/wallet
+    username: jcvetko
+    password: Bingchiling1738
+    driver-class-name: oracle.jdbc.OracleDriver
+
+server:
+  port: 6464
