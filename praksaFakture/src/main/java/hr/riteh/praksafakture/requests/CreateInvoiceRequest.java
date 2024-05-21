@@ -7,5 +7,5 @@ import java.util.Map;
 public class CreateInvoiceRequest {
     private Long paymentTypeId;
     private Map<Long, Long> products;
-    private String customerName;
+    private String customerUsername;
 }

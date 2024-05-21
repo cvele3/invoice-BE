@@ -37,6 +37,14 @@ public class InvoiceController {
         return new ResponseEntity<>(invoiceEntityList, HttpStatus.OK);
     }
 
+    @GetMapping(PathParamConstants.GET_ALL_INVOICES_BY_USERNAME + "/{username}")
+    public ResponseEntity<List<InvoiceEntity>> getAllInvoicesByUser(@PathVariable String username) {
+        log.info("Getting all invoices by user");
+        List<InvoiceEntity> invoiceEntityList = invoiceService.getInvoicesByUsername(username);
+
+        return new ResponseEntity<>(invoiceEntityList, HttpStatus.OK);
+    }
+
     @GetMapping(PathParamConstants.GET_INVOICE_BY_ID + "/{id}")
     public ResponseEntity<InvoiceEntity> getInvoiceById(@PathVariable Long id) {
         log.info("Getting invoice by id");

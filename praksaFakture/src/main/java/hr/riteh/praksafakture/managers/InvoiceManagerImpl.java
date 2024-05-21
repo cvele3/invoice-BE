@@ -3,10 +3,7 @@ package hr.riteh.praksafakture.managers;
 import hr.riteh.praksafakture.database.entity.InvoiceEntity;
 import hr.riteh.praksafakture.database.entity.InvoiceItemEntity;
 import hr.riteh.praksafakture.requests.CreateInvoiceRequest;
-import hr.riteh.praksafakture.services.InvoiceItemService;
-import hr.riteh.praksafakture.services.InvoiceService;
-import hr.riteh.praksafakture.services.PaymentTypeService;
-import hr.riteh.praksafakture.services.ProductService;
+import hr.riteh.praksafakture.services.*;
 import hr.riteh.praksafakture.utils.MathUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +19,15 @@ public class InvoiceManagerImpl implements InvoiceManager {
     private final ProductService productService;
     private final PaymentTypeService paymentTypeService;
     private final InvoiceItemService invoiceItemService;
+    private final UserService userService;
 
     @Autowired
-    public InvoiceManagerImpl(InvoiceService invoiceService, ProductService productService, PaymentTypeService paymentTypeService, InvoiceItemService invoiceItemService) {
+    public InvoiceManagerImpl(InvoiceService invoiceService, ProductService productService, PaymentTypeService paymentTypeService, InvoiceItemService invoiceItemService, UserService userService) {
         this.invoiceService = invoiceService;
         this.productService = productService;
         this.paymentTypeService = paymentTypeService;
         this.invoiceItemService = invoiceItemService;
+        this.userService = userService;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class InvoiceManagerImpl implements InvoiceManager {
         invoiceEntity.setPaymentType(paymentTypeService.getPaymentType(request.getPaymentTypeId()));
         invoiceEntity.setInvoiceDate(new Date());
         invoiceEntity.setInvoiceAmount(MathUtils.roundToTwoDecimalPlaces(productService.getTotalProductsPrice(request.getProducts())));
-        invoiceEntity.setCustomerName(request.getCustomerName());
+        invoiceEntity.setCustomerUsername(userService.getUserByUsername(request.getCustomerUsername()).getUsername());
         invoiceEntity.setInvoiceNumber(invoiceService.getInvoiceNumber());
 
         log.info("4. Saving invoice entity");

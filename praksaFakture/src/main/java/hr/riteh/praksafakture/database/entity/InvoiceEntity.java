@@ -28,16 +28,15 @@ public class InvoiceEntity {
     private Date invoiceDate;
 
     @Basic
-    @Column(name = ColumnNames.CUSTOMER_NAME, nullable = false, length = 100)
-    private String customerName;
-
-    @Basic
     @Column(name = ColumnNames.INVOICE_NUMBER, nullable = false)
     private Long invoiceNumber;
 
     @Basic
     @Column(name = ColumnNames.INVOICE_AMOUNT, nullable = false)
     private Double invoiceAmount;
+
+    @JoinColumn(name = ColumnNames.CUSTOMER_USERNAME, referencedColumnName = ColumnNames.USERNAME)
+    private String customerUsername;
 
     @ManyToOne
     @JoinColumn(name = ColumnNames.PAYMENT_TYPE, referencedColumnName = ColumnNames.ID)
@@ -49,9 +48,9 @@ public class InvoiceEntity {
         return "InvoiceEntity{" +
                 "id=" + id +
                 ", invoiceDate=" + dateFormat.format(invoiceDate) +
-                ", customerName='" + customerName + '\'' +
                 ", invoiceNumber=" + invoiceNumber +
                 ", invoiceAmount=" + invoiceAmount +
+                ", customerUsername=" + customerUsername +
                 ", paymentType=" + paymentType +
                 '}';
     }

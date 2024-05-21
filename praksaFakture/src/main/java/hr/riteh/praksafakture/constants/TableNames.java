@@ -9,4 +9,5 @@ public class TableNames {
     public static final String PRODUCTS = "PRODUCTS";
     public static final String INVOICES = "INVOICES";
     public static final String INVOICE_ITEMS = "INVOICE_ITEMS";
+    public static final String USERS = "USERS";
 }

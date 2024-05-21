@@ -48,4 +48,9 @@ public class InvoiceServiceImpl implements InvoiceService {
         log.info("Getting invoice by id: {}", id);
         return invoiceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invoice with id: " + id + " does not exist"));
     }
+
+    @Override
+    public List<InvoiceEntity> getInvoicesByUsername(String username) {
+        return invoiceRepository.findInvoicesByUsername(username);
+    }
 }

@@ -18,7 +18,7 @@ public class ColumnNames {
 
     // INVOICES columns
     public static final String INVOICE_DATE = "invoice_date";
-    public static final String CUSTOMER_NAME = "customer_name";
+    public static final String CUSTOMER_USERNAME = "customer_username";
     public static final String INVOICE_NUMBER = "invoice_number";
     public static final String INVOICE_AMOUNT = "invoice_amount";
     public static final String PAYMENT_TYPE = "payment_type";
@@ -28,4 +28,9 @@ public class ColumnNames {
     public static final String AMOUNT = "amount";
     public static final String INVOICE_ID = "invoice_id";
     public static final String PRODUCT_ID = "product_id";
+
+    // USERS columns
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String FULL_NAME = "fullname";
 }

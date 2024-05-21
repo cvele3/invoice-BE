@@ -15,4 +15,6 @@ public interface InvoiceService {
     List<InvoiceEntity> getAllInvoices();
 
     InvoiceEntity getInvoiceById(Long id);
+
+    List<InvoiceEntity> getInvoicesByUsername(String username);
 }

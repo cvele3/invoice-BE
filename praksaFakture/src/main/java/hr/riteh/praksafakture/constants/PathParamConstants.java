@@ -22,4 +22,7 @@ public class PathParamConstants {
     public static final String DELETE_INVOICE = "/deleteInvoice";
     public static final String GET_INVOICE_BY_ID = "/getInvoiceById";
     public static final String GET_INVOICE_ITEM_BY_ID = "/getInvoiceItemById";
+    public static final String REGISTER_USER = "/registration";
+    public static final String LOGIN_USER = "/login";
+    public static final String GET_ALL_INVOICES_BY_USERNAME = "/getAllInvoicesByUsername";
 }
