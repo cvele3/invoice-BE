@@ -8,11 +8,14 @@ import hr.riteh.praksafakture.requests.CreateInvoiceRequest;
 import hr.riteh.praksafakture.services.InvoiceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @Log4j2
@@ -67,6 +70,30 @@ public class InvoiceController {
         invoiceManager.deleteInvoice(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = PathParamConstants.DOWNLOAD_INVOICE + "/{id}")
+    public ResponseEntity<InputStreamResource> downloadInvoice(@PathVariable Long id) {
+        ByteArrayInputStream in = invoiceManager.invoiceToExcel(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=invoice.xlsx");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new InputStreamResource(in));
+    }
+
+    @GetMapping(value = PathParamConstants.DOWNLOAD_ALL_INVOICES + "/{username}")
+    public ResponseEntity<InputStreamResource> downloadAllInvoices(@PathVariable String username) {
+        ByteArrayInputStream in = invoiceManager.allInvoicesToExcel(username);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=all_invoices.xlsx");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new InputStreamResource(in));
     }
 
 }

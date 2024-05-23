@@ -4,12 +4,15 @@ import hr.riteh.praksafakture.database.entity.InvoiceEntity;
 import hr.riteh.praksafakture.database.entity.InvoiceItemEntity;
 import hr.riteh.praksafakture.requests.CreateInvoiceRequest;
 import hr.riteh.praksafakture.services.*;
+import hr.riteh.praksafakture.utils.ExcelUtils;
 import hr.riteh.praksafakture.utils.MathUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.util.Date;
+import java.util.List;
 
 @Log4j2
 @Service
@@ -71,5 +74,17 @@ public class InvoiceManagerImpl implements InvoiceManager {
 
         log.info("2. Deleting invoice with id: {}", id);
         invoiceService.deleteInvoice(id);
+    }
+
+    @Override
+    public ByteArrayInputStream invoiceToExcel(Long id) {
+        InvoiceEntity invoice = invoiceService.getInvoiceById(id);
+        return ExcelUtils.invoicesToExcel(List.of(invoice));
+    }
+
+    @Override
+    public ByteArrayInputStream allInvoicesToExcel(String username) {
+        List<InvoiceEntity> allInvoices = invoiceService.getInvoicesByUsername(username);
+        return ExcelUtils.invoicesToExcel(allInvoices);
     }
 }

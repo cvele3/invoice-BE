@@ -25,4 +25,6 @@ public class PathParamConstants {
     public static final String REGISTER_USER = "/registration";
     public static final String LOGIN_USER = "/login";
     public static final String GET_ALL_INVOICES_BY_USERNAME = "/getAllInvoicesByUsername";
+    public static final String DOWNLOAD_INVOICE = "/downloadInvoice";
+    public static final String DOWNLOAD_ALL_INVOICES = "/downloadAllInvoices";
 }
